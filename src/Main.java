@@ -11,6 +11,7 @@ public class Main {
 class Fila {
     public Fila() {
         System.out.println("Classe Fila diz: \"Olá, mundo!\"");            
+        
         /*
          * ----------------------
          * INSERÇÕES E REMOÇÕES
@@ -22,5 +23,14 @@ class Fila {
          * da fila.
          * ----------------------
         */
+    }
+
+    public void inserir() {
+        // Como será que a gente descobre
+        // se o dado será o primeiro a entrar na lista?
+
+        // Mulé, tú tá falando consigo mesmo? Lembre que a implementação
+        // o gerenciamento da lista é de responsabilidade dela mesma.
+        // Verifique se você pode pedir que ela informe sobre a ordem dos nós.
     }
 }
