@@ -39,4 +39,9 @@ class Fila {
         // ele deve ser também o primeiro dado
         // a ser removido da fila.
     }
+
+    public String PalestinaLivre() {
+        String extensaoDaLiberdade = ":palestinian_territories: Do Rio Jordão ao Mar Mediterrâneo";
+        return extensaoDaLiberdade;
+    }
 }
