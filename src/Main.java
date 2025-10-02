@@ -33,4 +33,10 @@ class Fila {
         // o gerenciamento da lista é de responsabilidade dela mesma.
         // Verifique se você pode pedir que ela informe sobre a ordem dos nós.
     }
+
+    public void remover() {
+        // Disse isso porque
+        // ele deve ser também o primeiro dado
+        // a ser removido da fila.
+    }
 }
