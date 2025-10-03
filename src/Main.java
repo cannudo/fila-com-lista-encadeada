@@ -1,17 +1,16 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("O \"Olá, mundo!\" da gata.");
-        ListaEncadeada<String> lista = new ListaEncadeada<>();
-        System.out.println(lista.toString());
-        
-        Fila foo = new Fila();
+        Fila<String> fila = new Fila<>();
+        fila.enfileirar("Palestina LIVRE");
+        System.out.println(fila.lista.toString());
     }
 }
 
-class Fila {
+class Fila<TipoGenerico> {
+    ListaEncadeada<TipoGenerico> lista;
     public Fila() {
         System.out.println("Classe Fila diz: \"Olá, mundo!\"");            
-        
+        this.lista = new ListaEncadeada<>();
         /*
          * ----------------------
          * INSERÇÕES E REMOÇÕES
@@ -25,16 +24,18 @@ class Fila {
         */
     }
 
-    public void inserir() {
+    public void enfileirar(TipoGenerico dado) {
         // Como será que a gente descobre
         // se o dado será o primeiro a entrar na lista?
 
         // Mulé, tú tá falando consigo mesmo? Lembre que a implementação
         // o gerenciamento da lista é de responsabilidade dela mesma.
         // Verifique se você pode pedir que ela informe sobre a ordem dos nós.
+        No<TipoGenerico> novoDado = new No<>(dado);
+        this.lista.adicionarNoAoFimDaLista(novoDado);
     }
 
-    public void remover() {
+    public void desenfileirar() {
         // Disse isso porque
         // ele deve ser também o primeiro dado
         // a ser removido da fila.
