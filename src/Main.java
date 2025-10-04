@@ -1,38 +1,20 @@
 public class Main {
     public static void main(String[] args) {
-        Fila<String> israelVaiTerQuePagarPelasSeguintesVidas = new Fila<>();
-        String[] nomesDasCriancas = {
-            "Razan Jihad Asaliyyah",
-            "Anas Bakri",
-            "Noura Walid Abdulsalam Shaheen",
-            "Maryam Nour Al-Din Wael Daban",
-            "Fatima Louay Rafiq Al-Sultan",
-            "Watan Mohammed Abd Al-Rahim Al-Madhoon",
-            "Mohammad Al-Jabbari Said Misbah Al-Khour",
-            "Diyaa Ahmed Abd Al-Aati Saleh Moussa",
-            "Oday Mohammed Rafiq Al-Sultan",
-            "Mohammed Nidal Hisham Attallah",
-            "Ahmad Shadi Talal Al-Haddad",
-            "Masa Mohammed Youssef Nasr",
-            "Ayat Abd Al-Aziz Omar Farwana",
-            "Maalek Mohammed Shafeeq Abu-Al-Kas",
-            "Sarah Abd Al-Rahman Mohammed Hamad",
-            "Mohammed Saleh Mahmoud Al-Deiri",
-            "Mecca Ahmed Eid Abu-Sherekh",
-            "Iyad Abd Al-Rahman Jihad Muhaysen",
-            "Adam Mohammed Sameer Abu-Ajwah",
-            "Alayan Abd Al-Rahman Alayan Al-Ashqar"
-        };
-
-        for(int i = 0; i < nomesDasCriancas.length; i++) {
-            israelVaiTerQuePagarPelasSeguintesVidas.enfileirar(nomesDasCriancas[i]);
+        Fila<String> fila = new Fila<>();
+        fila.enfileirar("Primeiro");
+        fila.enfileirar("Segundo");
+        System.out.println(fila.lista.toString());
+        No<String> fifo = fila.primeiroDadoDaFila();
+        No<String> provaDeConceito = fila.desenfileirarEPegarODadoRemovido();
+        System.out.println(fifo);
+        System.out.println(provaDeConceito);
+        System.out.println("O esquema FIFO foi seguido? " + (fifo == provaDeConceito ? "Sim, o esquema foi seguido." : "Não, o esquema não foi seguido."));
+        try {
+            fila.desenfileirar();
+        } catch (FilaVaziaException e) {
+            System.err.println("Método desenfileirar() não foi executado: a lista está vazia.");
         }
-
-        System.out.println(israelVaiTerQuePagarPelasSeguintesVidas.lista.toString());
-
-        for(int i = 0; i < nomesDasCriancas.length; i++) {
-            israelVaiTerQuePagarPelasSeguintesVidas.desenfileirar();
-        }
+        System.out.println(fila.lista.toString());
     }
 }
 
@@ -73,10 +55,26 @@ class Fila<TipoGenerico> {
     public void desenfileirar() {
         // Disse isso porque
         // ele deve ser também o primeiro dado
-        // a ser removido da fila.;
-        this.lista.removerUltimoNo();
+        // a ser removido da fila.
+        if(this.estaVazia()) {
+            throw new FilaVaziaException("desenfileirar(): a fila está vazia.");
+        }
+        this.lista.removerNoDoInicio();
         this.decrementrarQuantidade();
         System.out.println("Quantidade de dados na fila: " + this.getQuantidade());
+    }
+
+    public No<TipoGenerico> desenfileirarEPegarODadoRemovido() {
+        // Disse isso porque
+        // ele deve ser também o primeiro dado
+        // a ser removido da fila.
+        if(this.estaVazia()) {
+            throw new FilaVaziaException("desenfileirar(): a fila está vazia.");
+        }
+        No<TipoGenerico> noRemovido = this.lista.removerNoDoInicio();
+        this.decrementrarQuantidade();
+        System.out.println("Quantidade de dados na fila: " + this.getQuantidade());
+        return noRemovido;
     }
 
     public void incrementarQuantidade() {
@@ -85,6 +83,20 @@ class Fila<TipoGenerico> {
 
     public void decrementrarQuantidade() {
         this.quantidade--;
+    }
+
+    public boolean estaVazia() {
+        return this.quantidade < 1;
+    }
+
+    public No<TipoGenerico> primeiroDadoDaFila() {
+        if(this.estaVazia()) {
+            throw new FilaVaziaException("Fila vazia");
+        }
+
+        No<TipoGenerico> retorno = this.lista.getCabeca();
+
+        return retorno;
     }
 
     public int getQuantidade() {
